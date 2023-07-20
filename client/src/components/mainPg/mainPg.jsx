@@ -13,7 +13,15 @@ const MainPg = ({ teamNum, member, setTeamInfo }) => {
 
   const handleTInfo = (event) => {
     event.preventDefault();
-    setTeamInfo(tNumRef.current.value, mberRef.current.value);
+    if (tNumRef.current.value !== "" && mberRef.current.value !== "") {
+      setTeamInfo(tNumRef.current.value, mberRef.current.value);
+    } else if (tNumRef.current.value === "") {
+      alert("몇 조인지 입력해주세요");
+      tNumRef.current.focus();
+    } else if (mberRef.current.value === "") {
+      alert("팀원 이름을 입력해주세요");
+      mberRef.current.focus();
+    }
   };
 
   const goQuestPg = (event, qNum) => {

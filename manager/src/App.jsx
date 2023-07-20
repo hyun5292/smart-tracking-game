@@ -1,3 +1,4 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import styles from "./App.module.css";
 import Footer from "./components/footer/footer";
 import Header from "./components/header/header";
@@ -13,6 +14,9 @@ const App = () => {
     <div className={styles.app}>
       <Header className={styles.header} />
       <div className={styles.content}>
+        <BrowserRouter>
+          <Routes></Routes>
+        </BrowserRouter>
         {/* <StartPg /> */}
         {/* <AnswerPg /> */}
         {/* <MapPg /> */}

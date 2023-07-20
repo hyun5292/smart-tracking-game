@@ -1,20 +1,23 @@
+import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import io from "socket.io-client";
 import styles from "./App.module.scss";
 import Footer from "./components/footer/footer";
 import Header from "./components/header/header";
 import MainPg from "./components/mainPg/mainPg";
 import MapPg from "./components/mapPg/mapPg";
 import QuestPg from "./components/questPg/questPg";
-import { useState } from "react";
+
+const socket = io.connect("http://localhost:3001");
 
 const App = () => {
   const [teamNum, setTeamNum] = useState(0);
   const [member, setMember] = useState("");
-  console.log(teamNum, member);
 
   const setTeamInfo = (tNum, mber) => {
     setTeamNum(tNum);
     setMember(mber);
+    socket.emit("join", { teamNum: tNum, member: mber });
   };
 
   return (
