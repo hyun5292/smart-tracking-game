@@ -3,13 +3,12 @@ import styles from "./header.module.scss";
 import { FaHome, FaMapMarkedAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-const Header = ({ fbData }) => {
+const Header = (props) => {
   const navigate = useNavigate();
 
   const goToPage = (event, pgLink) => {
     event.preventDefault();
-    if (pgLink === "/") navigate(pgLink);
-    else navigate(pgLink, { state: fbData.getMap() });
+    navigate(pgLink);
   };
 
   return (

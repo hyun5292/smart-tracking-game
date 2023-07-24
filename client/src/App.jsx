@@ -23,7 +23,7 @@ const App = ({ fbData }) => {
   return (
     <div className={styles.app}>
       <BrowserRouter>
-        <Header className={styles.header} fbData={fbData} />
+        <Header className={styles.header} />
         <div className={styles.content}>
           <Routes>
             <Route
@@ -36,7 +36,7 @@ const App = ({ fbData }) => {
                 />
               }
             />
-            <Route path="map" element={<MapPg />} />
+            <Route path="map" element={<MapPg fbData={fbData} />} />
             <Route
               path="quest"
               element={<QuestPg teamNum={teamNum} member={member} />}

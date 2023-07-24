@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import styles from "./mapPg.module.scss";
 import pStyle from "../../css/page.module.scss";
 
-const MapPg = (props) => {
-  const location = useLocation("");
+const MapPg = ({ fbData }) => {
   const [mapAddr, setMapAddr] = useState("");
 
   useEffect(() => {
-    if (location.state) {
-      setMapAddr(location.state);
-    } else
-      setMapAddr(
-        "https://res.cloudinary.com/sudol5292/image/upload/v1689858226/%EC%96%91%EC%B2%AD%EC%88%98_%EC%A7%80%EB%8F%84_wz4gsj.png"
-      );
-  }, [location]);
+    fbData.getMap().then((result) => {
+      if (result) setMapAddr(result);
+      else
+        setMapAddr(
+          "https://res.cloudinary.com/sudol5292/image/upload/v1690211157/%EC%96%91%EC%B2%AD%EC%88%98_%EC%A7%80%EB%8F%84_cphw3t.png"
+        );
+    });
+  }, [fbData]);
 
   return (
     <div className={`${styles.mapPg} ${pStyle.default}`}>
