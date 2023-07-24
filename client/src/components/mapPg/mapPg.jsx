@@ -1,14 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import styles from "./mapPg.module.scss";
 import pStyle from "../../css/page.module.scss";
 
 const MapPg = (props) => {
+  const location = useLocation("");
+  const [mapAddr, setMapAddr] = useState("");
+
+  useEffect(() => {
+    if (location.state) {
+      setMapAddr(location.state);
+    } else
+      setMapAddr(
+        "https://res.cloudinary.com/sudol5292/image/upload/v1689858226/%EC%96%91%EC%B2%AD%EC%88%98_%EC%A7%80%EB%8F%84_wz4gsj.png"
+      );
+  }, [location]);
+
   return (
     <div className={`${styles.mapPg} ${pStyle.default}`}>
       <div className={styles.title}>지도</div>
       <img
         className={styles.map_image}
-        src="./images/example2.png"
+        src={mapAddr}
         alt="지도 이미지"
         width="100%"
         height="auto"

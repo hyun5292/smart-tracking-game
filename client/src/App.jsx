@@ -10,7 +10,7 @@ import QuestPg from "./components/questPg/questPg";
 
 const socket = io.connect("http://localhost:3001");
 
-const App = () => {
+const App = ({ fbData }) => {
   const [teamNum, setTeamNum] = useState(0);
   const [member, setMember] = useState("");
 
@@ -23,7 +23,7 @@ const App = () => {
   return (
     <div className={styles.app}>
       <BrowserRouter>
-        <Header className={styles.header} />
+        <Header className={styles.header} fbData={fbData} />
         <div className={styles.content}>
           <Routes>
             <Route
