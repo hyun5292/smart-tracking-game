@@ -1,3 +1,9 @@
+@keyframes spin {
+  0% {transform: rotate(0deg);}
+  50% {transform: rotate(180deg);}
+  100% {transform: rotate(180deg);}
+}
+
 .mapPg {
   text-align: center;
 }
@@ -8,8 +14,47 @@
 .title {
 }
 
+.loading, 
 .map_image {
   padding: 5px;
   margin: 10px auto;
   border: 1px solid grey;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+}
+
+.loading span, 
+.loading span::before,
+.loading span::after {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: grey;
+}
+
+.loading span {
+  position: relative;
+  animation: spin 1.5s ease-in-out infinite;
+}
+
+.loading span::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -25px;
+  opacity: 0.5;
+}
+
+.loading span::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -25px;
+  opacity: 0.5;
 }

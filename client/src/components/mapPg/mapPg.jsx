@@ -4,6 +4,7 @@ import pStyle from "../../css/page.module.scss";
 
 const MapPg = ({ fbData }) => {
   const [mapAddr, setMapAddr] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fbData.getMap().then((result) => {
@@ -15,16 +16,29 @@ const MapPg = ({ fbData }) => {
     });
   }, [fbData]);
 
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
+
   return (
     <div className={`${styles.mapPg} ${pStyle.default}`}>
       <div className={styles.title}>지도</div>
-      <img
-        className={styles.map_image}
-        src={mapAddr}
-        alt="지도 이미지"
-        width="100%"
-        height="auto"
-      />
+      {loading ? (
+        <div className={styles.loading}>
+          <span></span>
+        </div>
+      ) : (
+        <img
+          className={styles.map_image}
+          src={mapAddr}
+          alt="지도 이미지"
+          width="100%"
+          height="auto"
+        />
+      )}
     </div>
   );
 };
