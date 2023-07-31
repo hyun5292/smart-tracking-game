@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const http = require("http");
 const cors = require("cors");
+const socketUpload = require("socketio-file-upload");
 const { Server } = require("socket.io");
 app.use(cors());
 
