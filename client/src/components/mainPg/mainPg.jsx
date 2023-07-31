@@ -30,7 +30,7 @@ const MainPg = ({ teamNum, member, setTeamInfo }) => {
       alert("팀 정보를 먼저 등록해주세요!");
       return;
     } else {
-      navigate("/quest", { state: { qNum: qNum } });
+      navigate("/quest", { state: { qNum: qNum.quest } });
     }
   };
 

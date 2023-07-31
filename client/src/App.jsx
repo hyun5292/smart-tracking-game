@@ -20,6 +20,13 @@ const App = ({ fbData }) => {
     socket.emit("join", { teamNum: tNum, member: mber });
   };
 
+  const sendAnswer = (tNum, qNum, answer) => {
+    console.log("tNum = ", tNum);
+    console.log("qNum = ", qNum);
+    console.log("answer = ", answer);
+    //socket.emit("checkAnswer", { tNum: tNum, qNum: qNum, answer: answer });
+  };
+
   return (
     <div className={styles.app}>
       <BrowserRouter>
@@ -39,7 +46,13 @@ const App = ({ fbData }) => {
             <Route path="map" element={<MapPg fbData={fbData} />} />
             <Route
               path="quest"
-              element={<QuestPg teamNum={teamNum} member={member} />}
+              element={
+                <QuestPg
+                  teamNum={teamNum}
+                  member={member}
+                  sendAnswer={sendAnswer}
+                />
+              }
             />
           </Routes>
         </div>

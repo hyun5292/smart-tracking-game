@@ -1,21 +1,41 @@
-import React from "react";
+import React, { useRef } from "react";
 import styles from "./questPg.module.scss";
 import pStyle from "../../css/page.module.scss";
 import { MdAddPhotoAlternate, MdSubdirectoryArrowRight } from "react-icons/md";
 import { BsFillClipboardCheckFill } from "react-icons/bs";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 
-const QuestPg = ({ teamNum, member }) => {
+const QuestPg = ({ teamNum, member, sendAnswer }) => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const answerRef = useRef();
   const [questNum, setQuestNum] = useState(0);
+
+  const doSendAnswer = () => {
+    if (teamNum === "" || teamNum === 0) {
+      alert("오류가 발생했습니다! 메인 페이지로 이동합니다!");
+      navigate("/");
+    } else if (questNum === "" || questNum === 0) {
+      alert("오류가 발생했습니다! 메인 페이지로 이동합니다!");
+      navigate("/");
+    } else if (answerRef.current.value === "") {
+      alert("정답을 먼저 입력해주세요!");
+      answerRef.current.focus();
+    } else {
+      sendAnswer(teamNum, questNum, answerRef.current.value);
+    }
+  };
 
   useEffect(() => {
     if (location.state) {
       setQuestNum(location.state.qNum);
+    } else {
+      alert("오류가 발생했습니다! 메인 페이지로 이동합니다!");
+      navigate("/");
     }
-  }, [location.state]);
+  }, [location.state, navigate]);
 
   return (
     <div className={`${styles.questPg} ${pStyle.default}`}>
@@ -29,13 +49,14 @@ const QuestPg = ({ teamNum, member }) => {
         </div>
       </div>
       <div className={styles.answerCont}>
-        <span className={styles.questNum}>1번</span>
+        <span className={styles.questNum}>{questNum}번</span>
         <textarea
+          ref={answerRef}
           className={styles.questAnswer}
           type="text"
           placeholder="해석한 내용을 입력해주세요"
         />
-        <button className={styles.upLoad_btn}>
+        <button className={styles.upLoad_btn} onClick={doSendAnswer}>
           <BsFillClipboardCheckFill />
         </button>
         <button className={styles.photo_btn}>
