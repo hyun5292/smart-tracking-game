@@ -68,10 +68,12 @@
 
     .photoCont {
       grid-area: photoCont;
+      width: 260px;
+      height: 200px;
+      border: 1px solid grey;
 
       .photoExample {
         padding: 5px;
-        border: 1px solid grey;
       }
 
       .photoAnswer {

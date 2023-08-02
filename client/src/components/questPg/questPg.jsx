@@ -12,6 +12,12 @@ const QuestPg = ({ teamNum, member, sendAnswer }) => {
   const navigate = useNavigate();
   const answerRef = useRef();
   const [questNum, setQuestNum] = useState(0);
+  const [qAnswer, setQAnswer] = useState("");
+  const [qImage, setQImage] = useState("");
+
+  const setAnswer = (event) => {
+    setQAnswer(event.target.value);
+  };
 
   const doSendAnswer = () => {
     if (teamNum === "" || teamNum === 0) {
@@ -24,7 +30,7 @@ const QuestPg = ({ teamNum, member, sendAnswer }) => {
       alert("정답을 먼저 입력해주세요!");
       answerRef.current.focus();
     } else {
-      sendAnswer(teamNum, questNum, answerRef.current.value);
+      sendAnswer(teamNum, questNum, qAnswer);
     }
   };
 
@@ -55,6 +61,7 @@ const QuestPg = ({ teamNum, member, sendAnswer }) => {
           className={styles.questAnswer}
           type="text"
           placeholder="해석한 내용을 입력해주세요"
+          onChange={setAnswer}
         />
         <button className={styles.upLoad_btn} onClick={doSendAnswer}>
           <BsFillClipboardCheckFill />
