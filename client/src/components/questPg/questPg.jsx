@@ -66,9 +66,17 @@ const QuestPg = ({ teamNum, member, sendAnswer }) => {
         <button className={styles.upLoad_btn} onClick={doSendAnswer}>
           <BsFillClipboardCheckFill />
         </button>
-        <button className={styles.photo_btn}>
-          <MdAddPhotoAlternate />
-        </button>
+        <div className={styles.photo_btn}>
+          <label className={styles.photo_icon} htmlFor="qImage">
+            <MdAddPhotoAlternate />
+          </label>
+          <input
+            className={styles.photo_input}
+            type="file"
+            id="qImage"
+            accept="image/png, image/jpeg"
+          />
+        </div>
         <div className={styles.photoCont}>
           <img
             className={styles.photoExample}
