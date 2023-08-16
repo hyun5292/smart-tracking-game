@@ -20,10 +20,11 @@ const App = ({ fbData }) => {
     socket.emit("join", { teamNum: tNum, member: mber });
   };
 
-  const sendAnswer = (tNum, qNum, answer) => {
+  const sendAnswer = (tNum, qNum, answer, img) => {
     console.log("tNum = ", tNum);
     console.log("qNum = ", qNum);
     console.log("answer = ", answer);
+    console.log("img = ", img);
     //socket.emit("checkAnswer", { tNum: tNum, qNum: qNum, answer: answer });
   };
 

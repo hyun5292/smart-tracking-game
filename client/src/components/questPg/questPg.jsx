@@ -13,7 +13,20 @@ const QuestPg = ({ teamNum, member, sendAnswer }) => {
   const answerRef = useRef();
   const [questNum, setQuestNum] = useState(0);
   const [qAnswer, setQAnswer] = useState("");
-  const [qImage, setQImage] = useState("");
+  const [qImage, setQImage] = useState({
+    img: "",
+    imgFile: "",
+  });
+
+  const loadFile = async (event) => {
+    console.log(1);
+    const img = URL.createObjectURL(event.target.files[0]);
+    setQImage({
+      img: img,
+      imgFile: event.target.files[0],
+    });
+    console.log("loadFile img = ", img);
+  };
 
   const setAnswer = (event) => {
     setQAnswer(event.target.value);
@@ -29,8 +42,10 @@ const QuestPg = ({ teamNum, member, sendAnswer }) => {
     } else if (answerRef.current.value === "") {
       alert("정답을 먼저 입력해주세요!");
       answerRef.current.focus();
+    } else if (qImage.img === "" || qImage.imgFile === "") {
+      alert("사진을 등록해주세요!");
     } else {
-      sendAnswer(teamNum, questNum, qAnswer);
+      sendAnswer(teamNum, questNum, qAnswer, qImage);
     }
   };
 
@@ -75,15 +90,16 @@ const QuestPg = ({ teamNum, member, sendAnswer }) => {
             type="file"
             id="qImage"
             accept="image/png, image/jpeg"
+            onChange={(event) => loadFile(event)}
           />
         </div>
         <div className={styles.photoCont}>
           <img
             className={styles.photoExample}
-            src="./images/example.jpg"
+            src={qImage.img ? qImage.img : "./images/example.jpg"}
             alt="예시 사진"
             width="100%"
-            height="auto"
+            height="100%"
           />
           <img className={styles.photoAnswer} src="" alt="촬영된 사진" />
         </div>
