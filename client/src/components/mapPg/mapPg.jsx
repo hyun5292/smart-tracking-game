@@ -26,11 +26,14 @@ const MapPg = ({ fbData }) => {
   return (
     <div className={`${styles.mapPg} ${pStyle.default}`}>
       <div className={styles.title}>지도</div>
-      {loading ? (
-        <div className={styles.loading}>
-          <span></span>
-        </div>
-      ) : (
+      <div className={styles.imgCont}>
+        {loading ? (
+          <div className={styles.loading}>
+            <span></span>
+          </div>
+        ) : (
+          ""
+        )}
         <img
           className={styles.map_image}
           src={mapAddr}
@@ -38,7 +41,7 @@ const MapPg = ({ fbData }) => {
           width="100%"
           height="auto"
         />
-      )}
+      </div>
     </div>
   );
 };
