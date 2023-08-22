@@ -19,13 +19,11 @@ const QuestPg = ({ teamNum, member, sendAnswer }) => {
   });
 
   const loadFile = async (event) => {
-    console.log(1);
     const img = URL.createObjectURL(event.target.files[0]);
     setQImage({
       img: img,
       imgFile: event.target.files[0],
     });
-    console.log("loadFile img = ", img);
   };
 
   const setAnswer = (event) => {
@@ -78,9 +76,6 @@ const QuestPg = ({ teamNum, member, sendAnswer }) => {
           placeholder="해석한 내용을 입력해주세요"
           onChange={setAnswer}
         />
-        <button className={styles.upLoad_btn} onClick={doSendAnswer}>
-          <BsFillClipboardCheckFill />
-        </button>
         <div className={styles.photo_btn}>
           <label className={styles.photo_icon} htmlFor="qImage">
             <MdAddPhotoAlternate />
@@ -93,6 +88,9 @@ const QuestPg = ({ teamNum, member, sendAnswer }) => {
             onChange={(event) => loadFile(event)}
           />
         </div>
+        <button className={styles.upLoad_btn} onClick={doSendAnswer}>
+          <BsFillClipboardCheckFill />
+        </button>
         <div className={styles.photoCont}>
           <img
             className={styles.photoExample}

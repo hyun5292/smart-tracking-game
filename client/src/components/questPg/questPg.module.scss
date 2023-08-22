@@ -29,8 +29,8 @@
   .answerCont {
     display: grid;
     grid-template-areas:
-      "questNum			questAnswer	upLoadBtn"
       "questNum			questAnswer	photoBtn"
+      "questNum			questAnswer	upLoadBtn"
       "questNum			photoCont		photoCont"
       "commentIcon	comment			comment";
     grid-template-columns: 30px 1fr 30px;
