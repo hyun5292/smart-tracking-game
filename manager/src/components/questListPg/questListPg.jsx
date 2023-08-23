@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./questListPg.module.css";
-import pStyle from "../../../css/page.module.css";
+import pStyle from "../../css/page.module.css";
 
 const QuestListPg = (props) => {
   const schName = "칠봉";

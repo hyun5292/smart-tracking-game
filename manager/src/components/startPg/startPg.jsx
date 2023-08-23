@@ -1,16 +1,30 @@
 import React from "react";
 import styles from "./startPg.module.css";
-import pStyle from "../../../css/page.module.css";
+import pStyle from "../../css/page.module.css";
 import { FaClipboardCheck, FaMapMarkedAlt } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const StartPg = (props) => {
+  const navigate = useNavigate();
+
+  const goToPage = (event, pgLink) => {
+    event.preventDefault();
+    navigate(pgLink);
+  };
+
   return (
     <div className={`${styles.startPg} ${pStyle.default}`}>
       <div className={styles.top_btns}>
-        <button className={`${styles.answer_btn} ${pStyle.square_btn}`}>
+        <button
+          className={`${styles.answer_btn} ${pStyle.square_btn}`}
+          onClick={(event) => goToPage(event, "/answer")}
+        >
           <FaClipboardCheck />
         </button>
-        <button className={`${styles.map_btn} ${pStyle.square_btn}`}>
+        <button
+          className={`${styles.map_btn} ${pStyle.square_btn}`}
+          onClick={(event) => goToPage(event, "/map")}
+        >
           <FaMapMarkedAlt />
         </button>
       </div>

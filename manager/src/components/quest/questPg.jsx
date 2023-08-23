@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./questPg.module.css";
-import pStyle from "../../../css/page.module.css";
+import pStyle from "../../css/page.module.css";
 import { MdSubdirectoryArrowRight } from "react-icons/md";
 import { FaCheckCircle, FaQuestion } from "react-icons/fa";
 import { RiArrowGoBackLine } from "react-icons/ri";
