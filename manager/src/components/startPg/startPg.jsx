@@ -1,16 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./startPg.module.css";
 import pStyle from "../../css/page.module.css";
 import { FaClipboardCheck, FaMapMarkedAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-const StartPg = (props) => {
+const StartPg = ({ isLogined, onRegSchNm }) => {
   const navigate = useNavigate();
+  const [schNm, setSchNm] = useState("");
+  const [schKind, setSchKind] = useState("");
+  const [tNum, setTNum] = useState(1);
+
+  const changeSchName = (event) => {
+    setSchNm(event.target.value);
+  };
+  const changeSchKind = (event) => {
+    setSchKind(event.target.value);
+  };
+  const changeTeamNum = (event) => {
+    setTNum(event.target.value);
+  };
 
   const goToPage = (event, pgLink) => {
     event.preventDefault();
     navigate(pgLink);
   };
+
+  const doRegister = (event) => {
+    event.preventDefault();
+    onRegSchNm(schNm + schKind, tNum);
+    navigate("/main");
+  };
+
+  useEffect(() => {
+    if (isLogined !== "true") {
+      navigate("/");
+    }
+  }, [isLogined, navigate]);
 
   return (
     <div className={`${styles.startPg} ${pStyle.default}`}>
@@ -34,11 +59,10 @@ const StartPg = (props) => {
             className={styles.schName}
             type="text"
             placeholder="학교이름"
+            onChange={changeSchName}
           />
-          <select name="schKind" id="schKind">
-            <option value="초등" selected>
-              초등
-            </option>
+          <select defaultValue="초등" onChange={changeSchKind}>
+            <option value="초등">초등</option>
             <option value="중">중</option>
             <option value="고등">고등</option>
           </select>
@@ -46,16 +70,18 @@ const StartPg = (props) => {
         </div>
         <div className={styles.teamNum}>
           <span>총</span>
-          <select name="teamNum" id="teamNum">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
+          <input
+            className={styles.teamNum}
+            type="number"
+            min="1"
+            max="30"
+            onChange={changeTeamNum}
+          />
           <span>조</span>
         </div>
-        <button className={styles.start_btn}>시작하기</button>
+        <button className={styles.start_btn} onClick={doRegister}>
+          시작하기
+        </button>
       </div>
     </div>
   );

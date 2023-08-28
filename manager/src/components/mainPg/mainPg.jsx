@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./mainPg.module.css";
 import pStyle from "../../css/page.module.css";
 import { FaClipboardCheck, FaPowerOff } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
-const MainPg = (props) => {
-  const schName = "칠봉";
-  const schKind = "초등학교";
-  const Teams = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+const MainPg = ({ schNm, tNum }) => {
+  const navigate = useNavigate();
+  console.log("schNm = ", schNm);
+  console.log("tNum = ", tNum);
+
+  useEffect(() => {
+    if (schNm || tNum) {
+      navigate("/start");
+    }
+  }, [navigate, schNm, tNum]);
 
   return (
     <div className={`${styles.mainPg} ${pStyle.default}`}>
@@ -18,15 +25,13 @@ const MainPg = (props) => {
           <FaPowerOff />
         </button>
       </div>
-      <div className={pStyle.title}>
-        {schName}
-        {schKind}
-      </div>
+      <div className={pStyle.title}>{schNm}</div>
       <div className={pStyle.content}>
         <div className={pStyle.btnCont}>
-          {Teams.map((team) => {
-            return <button className={pStyle.btnItem}>{team}조</button>;
-          })}
+          {tNum &&
+            tNum.map((team) => {
+              return <button className={pStyle.btnItem}>{team}조</button>;
+            })}
         </div>
       </div>
     </div>

@@ -8,7 +8,7 @@
   height: s_minHeight;
 }
 
-.loginCont {
+.login_form {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -18,9 +18,14 @@
   height: 100%;
 }
 
-.loginCont input,
-.loginCont button {
+.login_form input,
+.login_form button {
   display: block;
   padding: 5px;
   width: 100%;
+}
+
+.warning {
+  color: red;
+  font-size: 0.8rem;
 }

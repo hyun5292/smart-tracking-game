@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import styles from "./App.module.css";
 import Footer from "./components/footer/footer";
@@ -11,18 +11,47 @@ import QuestListPg from "./components/questListPg/questListPg";
 import QuestPg from "./components/quest/questPg";
 import LoginPg from "./components/login/loginPg";
 
-const App = () => {
+//아이디: admin5144
+//비번: Yangju5144!
+const App = ({ authService, schService }) => {
+  const [isLogined, setIsLogined] = useState("false");
   const [schNm, setSchNm] = useState("");
+  const [tNum, setTNum] = useState(0);
+  console.log("isLogined = ", isLogined);
+
+  const onLogin = async (mId, mPw) => {
+    await authService.login(mId, mPw).then((result) => {
+      setIsLogined(result);
+    });
+    return isLogined;
+  };
+
+  const onLogout = useCallback(() => {
+    authService.logout().then(window.location.reload());
+    setIsLogined("false");
+  }, [authService]);
+
+  const onRegSchNm = (schName, tNum) => {
+    // schService.registerSchool();
+
+    setSchNm(schName);
+    setTNum(tNum);
+  };
 
   return (
     <div className={styles.app}>
-      <Header className={styles.header} schNm={schNm} />
+      <Header className={styles.header} schNm={schNm} onLogout={onLogout} />
       <div className={styles.content}>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<LoginPg />} />
-            <Route path="main" element={<MainPg />} />
-            <Route path="start" element={<StartPg />} />
+            <Route path="/" element={<LoginPg onLogin={onLogin} />} />
+            <Route path="main" element={<MainPg schNm={schNm} tNum={tNum} />} />
+            <Route
+              path="start"
+              element={
+                <StartPg isLogined={isLogined} onRegSchNm={onRegSchNm} />
+              }
+            />
             <Route path="answer" element={<AnswerPg />} />
             <Route path="map" element={<MapPg />} />
             <Route path="quest_list" element={<QuestListPg />} />
