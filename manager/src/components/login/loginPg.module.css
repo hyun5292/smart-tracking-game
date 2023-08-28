@@ -1,0 +1,26 @@
+@value s_minHeight from '../../common/sizes.css';
+
+.loginPg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: s_minHeight;
+}
+
+.loginCont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 50%;
+  height: 100%;
+}
+
+.loginCont input,
+.loginCont button {
+  display: block;
+  padding: 5px;
+  width: 100%;
+}

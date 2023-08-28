@@ -9,6 +9,7 @@ import StartPg from "./components/startPg/startPg";
 import MainPg from "./components/mainPg/mainPg";
 import QuestListPg from "./components/questListPg/questListPg";
 import QuestPg from "./components/quest/questPg";
+import LoginPg from "./components/login/loginPg";
 
 const App = () => {
   const [schNm, setSchNm] = useState("");
@@ -19,7 +20,8 @@ const App = () => {
       <div className={styles.content}>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<MainPg />} />
+            <Route path="/" element={<LoginPg />} />
+            <Route path="main" element={<MainPg />} />
             <Route path="start" element={<StartPg />} />
             <Route path="answer" element={<AnswerPg />} />
             <Route path="map" element={<MapPg />} />

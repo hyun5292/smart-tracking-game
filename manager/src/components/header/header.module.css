@@ -1,6 +1,7 @@
 .header {
   position: relative;
   padding: 10px;
+  height: 70px;
   font-weight: 700;
   text-align: center;
   background: grey;
